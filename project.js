@@ -53,27 +53,6 @@ class Player {
         this.x += 0;
         this.y += 0;
     }
-
-
-
-    animateScript() {
-
-    var position = 0;
-    const interval = 100;
-
-    tID = setInterval(() => {
-        playerImg.style.backgroundPosition = 
-        `-${position}px 0px`; 
-        if (position < 1200){ 
-            position = position + 120;
-        } else {
-            position = 0;
-        }
-        }
-        , interval);
-    }
-
-// animateScript()
 }
  
 
