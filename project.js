@@ -53,6 +53,27 @@ class Player {
         this.x += 0;
         this.y += 0;
     }
+
+
+
+    animateScript() {
+
+    var position = 0;
+    const interval = 100;
+
+    tID = setInterval(() => {
+        playerImg.style.backgroundPosition = 
+        `-${position}px 0px`; 
+        if (position < 1200){ 
+            position = position + 120;
+        } else {
+            position = 0;
+        }
+        }
+        , interval);
+    }
+
+// animateScript()
 }
  
 
@@ -71,7 +92,6 @@ class Cow {
     }
 
     move=()=>{
-        // console.log("MOVING")
         this.int = setInterval(this.changeDirection, 1000);
     }
 
@@ -81,10 +101,9 @@ class Cow {
     }
 
     changeDirection = () => {
-        // setInterval(changeDirection, 4000);
         if (this.speedX === 0){
             this.speedX = (Math.round(Math.random() * 2) - 1) * cowSpeed;
-        } else { //this changes direction
+        } else {
             this.speedX = Math.round(Math.random()*2-1) * this.speedX;
         }
         if (this.speedY === 0){
@@ -129,20 +148,14 @@ for (let i = 0; i<cowNumber; i++){
 }
 
 let player = new Player();
-// let cow = new Cow();
 
 
 //FIGHT
 function pvm(target){
-    console.log(attacking)
-    // attacking = true
     cowDead = false
     if (attacking){
         target.receiveDamage(player.attack())
-        // ctx.fillRect(target.x, target.y - 15, target.health*5, 10)
-
         player.receiveDamage(target.attack())
-        // ctx.fillRect(player.x - player.w, player.y - 15, player.health*5, 10)
 
         console.log(target.health)
         console.log(player.health)
@@ -158,37 +171,18 @@ function pvm(target){
             console.log("Oh dear you're dead!")
             attacking = false
             playerDead = true
-            // click = false
         }
     }
-    // if (!attacking){
-    //     return
-    // }
-    
-//     if (click) {
-//         cow.move()
-//    }
 }
 
 
 
 //MOVING TO COW WHEN CLICKED
 function moveToCow(target) {
-    // console.log(click)
     target.speedX = 0
     target.speedY = 0
-    // console.log(click)
-    // console.log("cow x: "+target.x)
-    // console.log("cow y: "+target.y)
-    // console.log("player x: "+(player.x+player.w))
-    // console.log("player y: "+player.y)
 
-
-    // if (player.x+player.w !== target.x){
-        //|| player.y+player.h !== target.y+target.h){
-            //if player touches cow, move to correct position
     if (player.x+player.w < target.x){
-        // console.log("first work")
         player.x += playerSpeed
         // target.x -= cowSpeed
     } 
@@ -196,8 +190,6 @@ function moveToCow(target) {
         player.x -= playerSpeed
         // target.x += cowSpeed
     }
-    // }
-    // if (player.y+player.h !== target.y+target.h){
     if (player.y+player.h > target.y+target.h){
         player.y -= playerSpeed
         // target.y += cowSpeed
@@ -206,18 +198,11 @@ function moveToCow(target) {
         player.y += playerSpeed
         // target.y -= cowSpeed
     }
-    // }
     if (player.x+player.w === target.x && player.y+player.h === target.y+target.h && click){
         click = false
         attacking = true
         attackingCow = target
         att = setInterval(()=>pvm(target), 1000)
-        // if (cowDead === true){
-        //     console.log(
-        //         "THE COW IS NOW DEAD"
-        //     )
-        //     clearInterval(att)
-        // }
     } 
 }
 
@@ -227,28 +212,23 @@ function getMousePosition(canvas, event) {
     let mouseX = event.clientX - rect.left;
     let mouseY = event.clientY - rect.top;
 
-    if (mouseX + player.w > canvas.width){
-        mouseX = canvas.width - player.w
+    if (mouseX - player.w < 0){
+        mouseX = player.w
         
     }
-    if (mouseY + player.h > canvas.height){
-        mouseY = canvas.height - player.h
+    if (mouseY - player.h < 0){
+        mouseY = player.h
     }
-
-    // console.log(mouseX)
     clickOnCow = false
 
     for (let i = 0; i<cowArr.length; i++){
         if (mouseX > cowArr[i].x && mouseX < cowArr[i].x+cowArr[i].w && mouseY > cowArr[i].y && mouseY < cowArr[i].y+cowArr[i].h){
             clickOnCow = true
-            // console.log(clickOnCow)
             moveToCow(cowArr[i])
-            // console.log(clickOnCow)
             cowArr[i].cancelInterval()
         }   
     }
     if (clickOnCow === false){
-        // console.log(clickOnCow)
         clearInterval(att)
         attacking = false
         for (let i = 0; i<cowArr.length; i++){
@@ -256,23 +236,22 @@ function getMousePosition(canvas, event) {
                 cowArr[i].move()
             }
         }
-        if (player.x < mouseX){
+        if (player.x + player.w < mouseX){
             player.x += player.speedX;
         }
-        if (player.x > mouseX){
+        if (player.x + player.w > mouseX){
             player.x -= player.speedX;
         }
-        if (player.y < mouseY){
+        if (player.y + player.h < mouseY){
             player.y += player.speedY;
         }
-        if (player.y > mouseY){
+        if (player.y + player.h > mouseY){
             player.y -= player.speedY;
         }
-        if (player.x === mouseX && player.y === mouseY){
+        if (player.x + player.w === mouseX && player.y + player.h === mouseY){
             click = false
         }
-    }
-    // click = false   
+    } 
 };
 
 function animate() {
@@ -304,21 +283,17 @@ function animate() {
                 cowArr[i].y < cowArrJ[j].y + cowArr[cowArr.indexOf(cowArrJ[j])].h &&
                 cowArr[i].y + cowArr[i].h > cowArr[cowArr.indexOf(cowArrJ[j])].y
               ){
-                //   console.log("BUMP")
                   cowArr[i].speedX = -cowArr[i].speedX
                   cowArr[i].speedY = -cowArr[i].speedY
-                //   cowArr[cowArr.indexOf(cowArrJ[j])].speedX = -cowArr[cowArr.indexOf(cowArrJ[j])].speedX
-                //   cowArr[cowArr.indexOf(cowArrJ[j])].speedY = -cowArr[cowArr.indexOf(cowArrJ[j])].speedX
               }
         }
     }
     if(click){
         getMousePosition(canvas, click)
-        // console.log("clicking")
         
     }
     if (attacking){
-        ctx.fillStyle = "Red"
+        ctx.fillStyle = "#870007"
         ctx.fillRect(player.x - player.w, player.y - 15, player.health*5, 10)
         ctx.fillRect(attackingCow.x+10, attackingCow.y - 15, attackingCow.health*7, 10)
     }
@@ -334,11 +309,5 @@ function animate() {
 canvas.addEventListener("click", function(e){
     click = {clientX: e.clientX, clientY: e.clientY}
 });
-
-// canvas.addEventListener("click", function(e){
-//     getMousePosition(canvas, e);
-// });
-
-// console.log(#canvas)
 
 animate();
