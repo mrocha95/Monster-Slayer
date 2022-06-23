@@ -1,9 +1,11 @@
 body {
-  background-color: honeydew;
+  background-color: black;
+  text-align: center;
 }
 
 canvas {
   background-color: white;
-  border: 1px solid black;
-  background-image: url("background.png");
+  border: 1px solid white;
+  background-image: url("Battleground.png");
+  background-size: 960px 540px;
 }
