@@ -11,7 +11,7 @@ let att;
 let playerSpeed = 0.5;
 let minionSpeed = 0.5
 
-let minionNumber = 5
+let minionNumber = 8
 
 let click = false
 let attacking = false
@@ -29,6 +29,8 @@ let killCount = 0
 let levelUpKills = 2
 
 let right = true;
+
+let playerLevel;
 
 //STILL IMAGE LEVEL 1
 let imgStill = new Image()
@@ -469,6 +471,8 @@ function animate() {
     ctx.fillStyle = "white";
     ctx.font = "18px Arial";
     ctx.fillText(`Kill Count: ${killCount}`, 10, 30);
+    ctx.fillText(`Player Level ${playerLevel}`, 10, 60);
+
 
     for (let i = 0; i<minionArr.length; i++){
         if (attacking){
@@ -522,6 +526,7 @@ function animate() {
     }
 
     if (killCount < levelUpKills){
+        playerLevel = 1
         if (!click && !attacking && !playerDead){
             player.drawStill();
         }
@@ -538,14 +543,8 @@ function animate() {
             ctx.fillRect(attackingMinion.x, attackingMinion.y - 10, attackingMinion.health*3, 5)
             player.drawAtt()
         }
-        if (playerDead){
-            ctx.fillStyle = "black"
-            ctx.fillRect(0, 0, canvas.width, canvas.height)
-            ctx.fillStyle = "white";
-            ctx.font = "32px Arial";
-            ctx.fillText("Game Over", canvas.width/2.5, canvas.height/2);
-        }
     } else if (killCount >= levelUpKills){
+        playerLevel = 2
         if (!click && !attacking && !playerDead){
             player.drawStill2();
             ctx.fillStyle = "#870007"
@@ -563,13 +562,13 @@ function animate() {
             ctx.fillRect(attackingMinion.x, attackingMinion.y - 10, attackingMinion.health*3, 5)
             player.drawAtt2()
         }
-        if (playerDead){
-            ctx.fillStyle = "black"
-            ctx.fillRect(0, 0, canvas.width, canvas.height)
-            ctx.fillStyle = "white";
-            ctx.font = "32px Arial";
-            ctx.fillText("Game Over", canvas.width/2.5, canvas.height/2);
-        }
+    if (playerDead){
+        ctx.fillStyle = "black"
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.fillStyle = "white";
+        ctx.font = "32px Arial";
+        ctx.fillText("Game Over", canvas.width/2.5, canvas.height/2);
+    }
     }
 };
 
