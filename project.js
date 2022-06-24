@@ -34,28 +34,28 @@ let playerLevel;
 
 //STILL IMAGE LEVEL 1
 let imgStill = new Image()
-imgStill.src = "images/player/level1/_Idle.png"
+imgStill.src = "images/player/level1/Idle.png"
 
 //RUNNING IMAGE LEVEL 1
 let imgRun = new Image()
-imgRun.src = "images/player/level1/_Run.png"
+imgRun.src = "images/player/level1/Run.png"
 
 //RUNNING IMAGE LEVEL 1 LEFT
 let imgRunLeft = new Image()
-imgRunLeft.src = "images/player/level1/_RunLeft.png"
+imgRunLeft.src = "images/player/level1/RunLeft.png"
 
 //STILL IMAGE LEVEL 2
 let imgStill2 = new Image()
-imgStill2.src = "images/player/level2/_Idle.png"
+imgStill2.src = "images/player/level2/Idle.png"
 
 //RUNNING IMAGE LEVEL 2
 let imgRun2 = new Image()
-imgRun2.src = "images/player/level2/_Run.png"
+imgRun2.src = "images/player/level2/Run.png"
 
 
 //RUNNING IMAGE LEVEL 2 LEFT
 let imgRunLeft2 = new Image()
-imgRunLeft2.src = "images/player/level2/_RunLeft.png"
+imgRunLeft2.src = "images/player/level2/RunLeft.png"
 
 let numRows = 1
 let numColumns = 10
@@ -95,11 +95,11 @@ setInterval(function(){
 
 //ATTACKING IMAGE
 let imgAtt = new Image()
-imgAtt.src = "images/player/level1/_AttackNoMovement.png"
+imgAtt.src = "images/player/level1/AttackNoMovement.png"
 
 //ATTACKING IMAGE LEVEL 2
 let imgAtt2 = new Image()
-imgAtt2.src = "images/player/level2/_AttackNoMovement.png"
+imgAtt2.src = "images/player/level2/AttackNoMovement.png"
 
 let numRowsAtt = 1
 let numColumnsAtt = 4
