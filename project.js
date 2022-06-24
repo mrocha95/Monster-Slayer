@@ -543,17 +543,19 @@ function animate() {
             ctx.fillRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = "white";
             ctx.font = "32px Arial";
-            ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+            ctx.fillText("Game Over", canvas.width/2.5, canvas.height/2);
         }
     } else if (killCount >= levelUpKills){
         if (!click && !attacking && !playerDead){
             player.drawStill2();
             ctx.fillStyle = "#870007"
         }
-        if(click){
+        if(click && right){
             getMousePosition(canvas, click)
             player.drawRun2()
-            
+        } else if (click && !right){
+            getMousePosition(canvas, click)
+            player.drawRunLeft2()
         }
         if (attacking){
             ctx.fillStyle = "#870007"
@@ -566,7 +568,7 @@ function animate() {
             ctx.fillRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = "white";
             ctx.font = "32px Arial";
-            ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+            ctx.fillText("Game Over", canvas.width/2.5, canvas.height/2);
         }
     }
 };
